@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="vBusca" Placeholder="Faça sua busca aqui" />
-            <ListView x:Name="vCatalogo" ItemsSource="">
+            <ListView x:Name="vCatalogo" ItemSelected="VCatalogo_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Text="{Binding Titulo}" Detail="{Binding Descricao}" ImageSource="{Binding Imagem}" />
