@@ -13,12 +13,14 @@ namespace ProductCatalog.Mobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CatalogoView : ContentPage
 	{
-		public CatalogoView ()
+        List<ProdutoModel> catalogo;
+
+        public CatalogoView ()
 		{
 
             InitializeComponent();
 
-            List<ProdutoModel> catalogo = new List<ProdutoModel>();
+            catalogo = new List<ProdutoModel>();
             for (int i = 0; i < 10; i++){
                 catalogo.Add(new ProdutoModel()
                 {
@@ -46,6 +48,26 @@ namespace ProductCatalog.Mobile.Views
             //Navega para a pagina do produto 
             //envia o produto selecionado
             Navigation.PushAsync(new ProdutoView(produto));
+        }
+
+        private void VBusca_SearchButtonPressed(object sender, EventArgs e)
+        {
+            var termo = vBusca.Text;
+            var consulta = catalogo.Where(p => p.Titulo.Contains(termo) || p.Descricao.Contains(termo)).ToList();
+            vCatalogo.ItemsSource = consulta;
+        }
+
+
+
+        private void BtnAdicionar_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnSlecionar_Clicked(object sender, EventArgs e)
+        {
+            var id = (int)((MenuItem)sender).CommandParameter;
+            DisplayAlert("Teste", $"Id={id}", "Fechar");
         }
     }
 }
