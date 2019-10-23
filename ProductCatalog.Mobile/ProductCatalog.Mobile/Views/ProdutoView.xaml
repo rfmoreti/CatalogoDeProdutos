@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductCatalog.Mobile.Views.ProdutoView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="vCategoria" Text="Categoria"/> 
+            <Image x:Name="vFoto" Source="" Aspect="AspectFill"/>           
+            <Label Text="Produto"/>
+            <Entry x:Name="vTitulo"/>
+            <Label Text="Descrição"/>
+            <Entry x:Name="vDescricao"/>
+            <Label Text="Preço"/>
+            <Entry x:Name="vPreco"/>
+            <Label Text="Estoque"/>
+            <Entry x:Name="vEstoque"/>
+            <Button x:Name="btnCompartilhar" Text="Compartilhar"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
