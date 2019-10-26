@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="vBusca" Placeholder="Faça sua busca aqui" SearchButtonPressed="VBusca_SearchButtonPressed"/>
-            <ListView x:Name="vCatalogo" ItemSelected="VCatalogo_ItemSelected">
+            <ListView x:Name="vCatalogo" ItemSelected="VCatalogo_ItemSelected" HasUnevenRows="True">
                 <!--<ListView.ItemTemplate>
                     <DataTemplate>
                         <ImageCell Text="{Binding Titulo}" Detail="{Binding Descricao}" ImageSource="{Binding Imagem}">
@@ -34,7 +34,7 @@
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
                                 
-                                <Image Grid.Row="0" Source="{Binding Imagem}" Aspect="AspectFill" HeightRequest="100"/>
+                                <Image Grid.Row="0" Source="{Binding Imagem}" Aspect="AspectFill" HeightRequest="100" />
                                 <Label Grid.Row="1" Text="{Binding Titulo}" FontSize="Medium"/>
                                 <Label Grid.Row="2" Text="{Binding Descricao}" FontSize="Small"/>
                             </Grid>

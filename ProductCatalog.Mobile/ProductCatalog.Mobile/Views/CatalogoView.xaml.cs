@@ -1,4 +1,5 @@
-﻿using ProductCatalog.Mobile.Models;
+﻿using ProductCatalog.Mobile.DAO;
+using ProductCatalog.Mobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,25 +20,6 @@ namespace ProductCatalog.Mobile.Views
 		{
 
             InitializeComponent();
-
-            catalogo = new List<ProdutoModel>();
-            for (int i = 0; i < 10; i++){
-                catalogo.Add(new ProdutoModel()
-                {
-                    Id = i,
-                    Titulo = $"Produto {i}",
-                    Descricao = "Descrição ",
-                    Preco = Convert.ToDecimal(3.00),
-                    Imagem = "http://picsum.photos/128/128",
-                    // CategoriaCodigo = 0,
-                    Estoque = Convert.ToDecimal(10),
-                });
-            }
-            //Adiciona o Catalogo de produtos na lista (listView)
-            vCatalogo.ItemsSource = catalogo;
-
-
-
 
 		}
 
@@ -61,13 +43,21 @@ namespace ProductCatalog.Mobile.Views
 
         private void BtnAdicionar_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new ProdutoView(new ProdutoModel()));
         }
 
         private void BtnSlecionar_Clicked(object sender, EventArgs e)
         {
             var id = (int)((MenuItem)sender).CommandParameter;
             DisplayAlert("Teste", $"Id={id}", "Fechar");
+        }
+
+        ProdutoDAO produtosDao = new ProdutoDAO();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            var listaDoBanco = produtosDao.Read(p => true);
+            vCatalogo.ItemsSource = listaDoBanco;
         }
     }
 }
