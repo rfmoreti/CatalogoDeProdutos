@@ -45,8 +45,7 @@ namespace ProductCatalog.Mobile.Views
                 dao.Inserir(produto);
             else
                 dao.Update(produto);
-
-            dao.Update(produto);
+           
             Navigation.PopAsync();
         }
     }

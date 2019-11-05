@@ -26,6 +26,8 @@
                         <ViewCell>
                             <ViewCell.ContextActions>
                                 <MenuItem x:Name="btnSlecionar" Text="Selecionar" Clicked="BtnSlecionar_Clicked" CommandParameter ="{Binding Id} " IsDestructive="True"/>
+                                <MenuItem x:Name="btnDelete" Text="Delete" Clicked ="BtnDelete_Clicked"  CommandParameter ="{Binding .} " IsDestructive="True"/>
+                                
                             </ViewCell.ContextActions>
                             <Grid>
                                 <Grid.RowDefinitions>

@@ -50,6 +50,7 @@ namespace ProductCatalog.Mobile.Views
         {
             var id = (int)((MenuItem)sender).CommandParameter;
             DisplayAlert("Teste", $"Id={id}", "Fechar");
+            
         }
 
         ProdutoDAO produtosDao = new ProdutoDAO();
@@ -58,6 +59,21 @@ namespace ProductCatalog.Mobile.Views
             base.OnAppearing();
             var listaDoBanco = produtosDao.Read(p => true);
             vCatalogo.ItemsSource = listaDoBanco;
+        }
+
+        private void BtnDelete_Clicked(object sender, EventArgs e)
+        {
+            var produto = (ProdutoModel)((MenuItem)sender).CommandParameter;
+            var dao = new ProdutoDAO();            
+
+            dao.Delete(produto);
+            var listaDoBanco = dao.ReadAll();
+
+            vCatalogo.ItemsSource = null;
+            vCatalogo.ItemsSource = listaDoBanco;
+
+            DisplayAlert("Teste", "Produto apagado com sucesso", "Fechar");
+
         }
     }
 }

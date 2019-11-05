@@ -10,28 +10,35 @@ namespace ProductCatalog.Mobile.DAO
     //será removido quando o banco for implementado
     public class ProdutoDAO
     {
-        private static List<ProdutoModel> tabelaProdutos = new List<ProdutoModel>();
-
         public void Inserir(ProdutoModel produto)
         {
-            produto.Id = tabelaProdutos.Count() + 1;
-            tabelaProdutos.Add(produto);
+            var conn = Connection.GetConn();
+            conn.Insert(produto);
+            conn.Close();
         }
-
         public IEnumerable<ProdutoModel> Read(Func<ProdutoModel, bool> query)
         {
-            return tabelaProdutos.Where(query);
+            var conn = Connection.GetConn();
+            return conn.Table<ProdutoModel>().Where(query).ToList();
+        }
+        public IEnumerable<ProdutoModel> ReadAll()
+        {
+            var conn = Connection.GetConn();
+            return conn.Table<ProdutoModel>().ToList();
         }
 
-        public void Update(ProdutoModel toUpdate)
+        public void Update(ProdutoModel newProd)
         {
-            ProdutoModel dbProduto = tabelaProdutos.Where(p => p.Id == toUpdate.Id).FirstOrDefault();
+            var conn = Connection.GetConn();
+            conn.Update(newProd);
+            conn.Close();
+        }
 
-            dbProduto.Titulo = toUpdate.Titulo;
-            dbProduto.Estoque = toUpdate.Estoque;
-            dbProduto.Preco = toUpdate.Preco;            
-            dbProduto.Descricao = toUpdate.Descricao;
-          
+        public void Delete(ProdutoModel produto)
+        {
+            var conn = Connection.GetConn();
+            conn.Delete(produto);
+            conn.Close();
         }
     }
 }

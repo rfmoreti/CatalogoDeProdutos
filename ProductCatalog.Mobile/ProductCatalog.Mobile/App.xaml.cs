@@ -13,30 +13,18 @@ namespace ProductCatalog.Mobile
         public App()
         {
             InitializeComponent();
-
-            IniciaBanco();
+            
+            
+            var bancoInicial = new Connection();
+            bancoInicial.StartDB();
 
             MainPage = new NavigationPage(new CatalogoView());
         }
 
         private void IniciaBanco()
         {
-            var produtoDao = new ProdutoDAO();
+         
             
-            for (int i = 1; i <= 10; i++)
-            {
-                produtoDao.Inserir(new ProdutoModel()
-                {
-                    Id = i,
-                    Titulo = $"Produto {i}",
-                    Descricao = "Descrição ",
-                    Preco = Convert.ToDecimal(3.00),
-                    Imagem = "http://picsum.photos/128/128",
-                    // CategoriaCodigo = 0,
-                    Estoque = Convert.ToDecimal(10),
-                });
-            }
-          
         }
 
         protected override void OnStart()
