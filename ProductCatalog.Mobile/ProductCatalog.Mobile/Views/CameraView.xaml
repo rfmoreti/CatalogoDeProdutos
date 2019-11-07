@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProductCatalog.Mobile.Views.CameraView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="64"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="vFoto" Aspect="AspectFill" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnTirar" Text="Tirar Foto" Clicked="BtnTirar_Clicked" Grid.Row="1" Grid.Column="0"/>
+            <Button x:Name="btnPegar" Text="Pegar Foto" Clicked="BtnPegar_Clicked" Grid.Row="1" Grid.Column="1"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
