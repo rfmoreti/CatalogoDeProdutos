@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ProductCatolog.WebAPI.Controllers
 {
@@ -33,6 +34,38 @@ namespace ProductCatolog.WebAPI.Controllers
 
                 return produtos;
             }
+        }
+
+        [ResponseType(typeof(Produto))]
+        public IHttpActionResult Get (int id)
+        {
+            using(DataContext context = new DataContext())
+            {
+                ProdutoService produtoService = new ProdutoService(context);
+
+                var p = produtoService.BuscarPorCodigo(id);
+
+                if (p != null)
+                    return Ok(p);
+                else
+                    return NotFound();
+            }
+        }
+
+        public IHttpActionResult Post(Produto p)
+        {
+            if (ModelState.IsValid)
+            {
+                using (DataContext context = new DataContext())
+                {
+                    ProdutoService produtoService = new ProdutoService(context);
+
+                    var retorno = produtoService.Inserir(p);
+
+                    return Ok(p);
+                }
+            }
+            return BadRequest(ModelState);
         }
     }
 }
