@@ -1,5 +1,6 @@
 ﻿using ProductCatalog.Mobile.DAO;
 using ProductCatalog.Mobile.Models;
+using ProductCatalog.Mobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ namespace ProductCatalog.Mobile.Views
 	public partial class CatalogoView : ContentPage
 	{
         List<ProdutoModel> catalogo;
+        ProdutoServiceApi produtoService;
 
         public CatalogoView ()
 		{
-
             InitializeComponent();
-
+            produtoService = new ProdutoServiceApi();
 		}
 
         private void VCatalogo_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -54,11 +55,22 @@ namespace ProductCatalog.Mobile.Views
         }
 
         ProdutoDAO produtosDao = new ProdutoDAO();
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            var listaDoBanco = produtosDao.Read(p => true);
-            vCatalogo.ItemsSource = listaDoBanco;
+
+            var response = await this.produtoService.GetLista();
+
+            if (response.Success)
+            {
+                foreach (var item in response.Value)
+                    produtosDao.Inserir(item);
+
+                
+                var listaDoBanco = produtosDao.Read(p => true);
+                vCatalogo.ItemsSource = listaDoBanco;
+            }
+            
         }
 
         private void BtnDelete_Clicked(object sender, EventArgs e)

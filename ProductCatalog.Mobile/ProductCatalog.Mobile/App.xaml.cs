@@ -18,7 +18,7 @@ namespace ProductCatalog.Mobile
             var bancoInicial = new Connection();
             bancoInicial.StartDB();
 
-            MainPage = new NavigationPage(new CameraView());
+            MainPage = new NavigationPage(new CatalogoView());
         }
 
         private void IniciaBanco()
