@@ -1,5 +1,6 @@
 ﻿using ProductCatalog.Mobile.DAO;
 using ProductCatalog.Mobile.Models;
+using ProductCatalog.Mobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace ProductCatalog.Mobile.Views
 	public partial class ProdutoView : ContentPage
 	{
         private ProdutoDAO dao = new ProdutoDAO();
+        private ProdutoServiceApi produtoServiceApi = new ProdutoServiceApi();
         ProdutoModel produtoAntigo;
 
 		public ProdutoView (ProdutoModel produto)
@@ -32,7 +34,7 @@ namespace ProductCatalog.Mobile.Views
 
 		}
 
-        private void BtnSalvar_Clicked(object sender, EventArgs e)
+        private async void BtnSalvar_ClickedAsync(object sender, EventArgs e)
         {
             var produto = new ProdutoModel();
             produto.Id = produtoAntigo.Id;
@@ -40,13 +42,21 @@ namespace ProductCatalog.Mobile.Views
             produto.Preco = decimal.Parse(this.vPreco.Text.Remove(0,2));
             produto.Descricao = this.vDescricao.Text;
             produto.Estoque = decimal.Parse(this.vEstoque.Text);
+            produto.CategoriaCodigo = 23;
+            produto.Ativo = true;
+            produto.Imagem = @"https://picsum.photos/200/300";
+
+            SauloWrapper<ProdutoModel> ret = null;
 
             if (produto.Id == 0)
-                dao.Inserir(produto);
+               ret = await produtoServiceApi.PostObj(produto);//dao.Inserir(produto);
             else
                 dao.Update(produto);
-           
-            Navigation.PopAsync();
+
+            if (ret.Success)
+                await Navigation.PopAsync();
+            else
+                await DisplayAlert("Alerta", ret.msg, "Ok");
         }
     }
 }

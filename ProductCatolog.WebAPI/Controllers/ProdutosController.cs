@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 
 namespace ProductCatolog.WebAPI.Controllers
 {
+    //testinho
     public class ProdutosController : ApiController
     {
         public IEnumerable<Produto> Get()
@@ -61,6 +62,8 @@ namespace ProductCatolog.WebAPI.Controllers
                     ProdutoService produtoService = new ProdutoService(context);
 
                     var retorno = produtoService.Inserir(p);
+
+                    context.SaveChanges();
 
                     return Ok(p);
                 }

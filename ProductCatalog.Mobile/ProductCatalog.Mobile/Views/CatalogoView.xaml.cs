@@ -15,6 +15,7 @@ namespace ProductCatalog.Mobile.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CatalogoView : ContentPage
 	{
+        ProdutoDAO produtosDao = new ProdutoDAO();
         List<ProdutoModel> catalogo;
         ProdutoServiceApi produtoService;
 
@@ -54,7 +55,7 @@ namespace ProductCatalog.Mobile.Views
             
         }
 
-        ProdutoDAO produtosDao = new ProdutoDAO();
+        
         protected async override void OnAppearing()
         {
             base.OnAppearing();

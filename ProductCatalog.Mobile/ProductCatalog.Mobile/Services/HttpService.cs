@@ -38,5 +38,7 @@ namespace ProductCatalog.Mobile.Services
             else
                 return "";
         }
+
+       
     }
 }

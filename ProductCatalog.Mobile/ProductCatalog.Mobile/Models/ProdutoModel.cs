@@ -17,6 +17,8 @@ namespace ProductCatalog.Mobile.Models
         public virtual CategoriaModel Categoria { get; set; }
         public int CategoriaCodigo { get; set; }
         public decimal Estoque { get; set; }
+        public bool Ativo { get; set; }
+
 
         //public int Codigo
         //{

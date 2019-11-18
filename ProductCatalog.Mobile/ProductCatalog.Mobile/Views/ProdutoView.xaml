@@ -25,7 +25,7 @@
                 <Entry x:Name="vEstoque"/>               
             </StackLayout>
             <Button x:Name="btnCompartilhar" Text="Compartilhar" Grid.Row="1" Grid.Column="0"/>
-            <Button x:Name="btnSalvar" Text="Salvar" Grid.Row="1" Grid.Column="1" Clicked="BtnSalvar_Clicked"/>
+            <Button x:Name="btnSalvar" Text="Salvar" Grid.Row="1" Grid.Column="1" Clicked="BtnSalvar_ClickedAsync"/>
 
         </Grid>
 
